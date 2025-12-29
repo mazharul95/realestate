@@ -1,11 +1,17 @@
+----------------------//
 # 📌 Project WorkLog
-----------------------
+----------------------//
+
+## 29-12-2025
+- 
+- 
+- Admin Template setup: Admin logout,
+- Dashboard Page Segmentation
+- Admin Custom login form, 
+
 ## 28-12-2025
-- 
-- 
 - Login With Email/Name/Phone verification system implemented
 - Laravel Multi Auth breeze User registration & login system added
-
 
 ## 24-12-2025
 - Worked on breeze multi authentication system

@@ -22,6 +22,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -30,9 +31,12 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth','role:admin'])->group(function () {
     Route::get('admin/dashboard',[AdminController::class,
         'AdminDashboard'])->name('admin.dashboard');
+
+    Route::get('/admin/logout',[AdminController::class,
+        'AdminLogout'])->name('admin.logout');
 });  //End Group Admin middleware
 
 Route::middleware(['auth', 'role:agent'])->group(function () {
@@ -40,5 +44,8 @@ Route::middleware(['auth', 'role:agent'])->group(function () {
         'AgentDashboard'])->name('admin.dashboard');
 
 });  //End Group Agent middleware
+
+Route::get('/admin/login',[AdminController::class,
+    'AdminLogin'])->name('admin.login');
 
 
