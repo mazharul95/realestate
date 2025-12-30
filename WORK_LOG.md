@@ -2,9 +2,11 @@
 # 📌 Project WorkLog
 ----------------------//
 
+## 30-12-2025
+- root home page replace to login page,
+- login page below register button added, when register button clicked register page open
+
 ## 29-12-2025
-- 
-- 
 - Admin Template setup: Admin logout,
 - Dashboard Page Segmentation
 - Admin Custom login form, 

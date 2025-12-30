@@ -1,13 +1,15 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
+
         <!-- Email Address -->
         <div>
             <x-input-label for="login" :value="__('Email/Name/Phone')" />
             <x-text-input id="login" class="block mt-1 w-full" type="text" name="login" :value="old('login')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+{{--            <x-input-error :messages="$errors->get('email')" class="mt-2" />--}}
         </div>
 
         <!-- Password -->
@@ -21,6 +23,7 @@
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
+
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
@@ -36,18 +39,9 @@
                 </a>
             @endif
 
-            <x-primary-button class="ms-2">
+            <x-primary-button class="ms-3">
                 {{ __('Log in') }}
             </x-primary-button>
         </div>
-
-        <!-- Register -->
-        <p class="text-center text-sm text-gray-600 mt-4 mb-24">
-            Don’t have an account?
-            <a href="{{ route('register') }}" class="text-indigo-600 font-semibold hover:underline">
-                Register
-            </a>
-        </p>
     </form>
 </x-guest-layout>
-
