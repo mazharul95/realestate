@@ -2,6 +2,10 @@
 # 📌 Project WorkLog
 ----------------------//
 
+## 01-01-2026
+- Refreach Admin Template, update Admin Assets Path,
+- Profile Page work on processing continue....
+
 ## 30-12-2025
 - root home page replace to login page,
 - login page below register button added, when register button clicked register page open

@@ -42,7 +42,7 @@
         </div>
 
         <!-- Register -->
-        <p class="text-center text-sm text-gray-600 mt-4 mb-24">
+        <p class="text-center text-sm text-gray-600 mt-4 mb-5">
             Don’t have an account?
             <a href="{{ route('register') }}" class="text-indigo-600 font-semibold hover:underline">
                 Register
