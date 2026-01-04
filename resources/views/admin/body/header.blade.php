@@ -14,7 +14,8 @@
         <ul class="navbar-nav">
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="appsDropdown" role="button" data-bs-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
                     <i data-feather="grid"></i>
                 </a>
                 <div class="dropdown-menu p-0" aria-labelledby="appsDropdown">
@@ -24,16 +25,28 @@
                     </div>
                     <div class="row g-0 p-1">
                         <div class="col-3 text-center">
-                            <a href="pages/apps/chat.html" class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i data-feather="message-square" class="icon-lg mb-1"></i><p class="tx-12">Chat</p></a>
+                            <a href="pages/apps/chat.html"
+                               class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i
+                                    data-feather="message-square" class="icon-lg mb-1"></i>
+                                <p class="tx-12">Chat</p></a>
                         </div>
                         <div class="col-3 text-center">
-                            <a href="pages/apps/calendar.html" class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i data-feather="calendar" class="icon-lg mb-1"></i><p class="tx-12">Calendar</p></a>
+                            <a href="pages/apps/calendar.html"
+                               class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i
+                                    data-feather="calendar" class="icon-lg mb-1"></i>
+                                <p class="tx-12">Calendar</p></a>
                         </div>
                         <div class="col-3 text-center">
-                            <a href="pages/email/inbox.html" class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i data-feather="mail" class="icon-lg mb-1"></i><p class="tx-12">Email</p></a>
+                            <a href="pages/email/inbox.html"
+                               class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i
+                                    data-feather="mail" class="icon-lg mb-1"></i>
+                                <p class="tx-12">Email</p></a>
                         </div>
                         <div class="col-3 text-center">
-                            <a href="pages/general/profile.html" class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i data-feather="instagram" class="icon-lg mb-1"></i><p class="tx-12">Profile</p></a>
+                            <a href="pages/general/profile.html"
+                               class="dropdown-item d-flex flex-column align-items-center justify-content-center wd-70 ht-70"><i
+                                    data-feather="instagram" class="icon-lg mb-1"></i>
+                                <p class="tx-12">Profile</p></a>
                         </div>
                     </div>
                     <div class="px-3 py-2 d-flex align-items-center justify-content-center border-top">
@@ -41,8 +54,16 @@
                     </div>
                 </div>
             </li>
+
+            @php
+                use Illuminate\Support\Facades\Auth;
+                $id = Auth::user()->id;
+                $profileData = App\Models\User::find($id);
+            @endphp
+
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button"
+                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i data-feather="mail"></i>
                 </a>
                 <div class="dropdown-menu p-0" aria-labelledby="messageDropdown">
@@ -53,7 +74,8 @@
                     <div class="p-1">
                         <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
                             <div class="me-3">
-                                <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
+                                <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30"
+                                     alt="userr">
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
                                 <div class="me-4">
@@ -65,7 +87,8 @@
                         </a>
                         <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
                             <div class="me-3">
-                                <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
+                                <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30"
+                                     alt="userr">
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
                                 <div class="me-4">
@@ -77,7 +100,8 @@
                         </a>
                         <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
                             <div class="me-3">
-                                <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
+                                <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30"
+                                     alt="userr">
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
                                 <div class="me-4">
@@ -89,7 +113,8 @@
                         </a>
                         <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
                             <div class="me-3">
-                                <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
+                                <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30"
+                                     alt="userr">
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
                                 <div class="me-4">
@@ -101,7 +126,8 @@
                         </a>
                         <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
                             <div class="me-3">
-                                <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
+                                <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30"
+                                     alt="userr">
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
                                 <div class="me-4">
@@ -118,7 +144,8 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button"
+                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i data-feather="bell"></i>
                     <div class="indicator">
                         <div class="circle"></div>
@@ -131,7 +158,8 @@
                     </div>
                     <div class="p-1">
                         <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                            <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                            <div
+                                class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
                                 <i class="icon-sm text-white" data-feather="gift"></i>
                             </div>
                             <div class="flex-grow-1 me-2">
@@ -140,7 +168,8 @@
                             </div>
                         </a>
                         <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                            <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                            <div
+                                class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
                                 <i class="icon-sm text-white" data-feather="alert-circle"></i>
                             </div>
                             <div class="flex-grow-1 me-2">
@@ -149,8 +178,10 @@
                             </div>
                         </a>
                         <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                            <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
-                                <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30" alt="userr">
+                            <div
+                                class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                                <img class="wd-30 ht-30 rounded-circle" src="https://via.placeholder.com/30x30"
+                                     alt="userr">
                             </div>
                             <div class="flex-grow-1 me-2">
                                 <p>New customer registered</p>
@@ -158,7 +189,8 @@
                             </div>
                         </a>
                         <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                            <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                            <div
+                                class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
                                 <i class="icon-sm text-white" data-feather="layers"></i>
                             </div>
                             <div class="flex-grow-1 me-2">
@@ -167,7 +199,8 @@
                             </div>
                         </a>
                         <a href="javascript:;" class="dropdown-item d-flex align-items-center py-2">
-                            <div class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
+                            <div
+                                class="wd-30 ht-30 d-flex align-items-center justify-content-center bg-primary rounded-circle me-3">
                                 <i class="icon-sm text-white" data-feather="download"></i>
                             </div>
                             <div class="flex-grow-1 me-2">
@@ -182,17 +215,18 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="wd-30 ht-30 rounded-circle" src="https://img.icons8.com/?size=100&id=492ILERveW8G&format=png&color=000000" alt="profile">
+                <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="wd-30 ht-30 rounded-circle" src="{{ (!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.jpg') }}" alt="profile">
                 </a>
                 <div class="dropdown-menu p-0" aria-labelledby="profileDropdown">
                     <div class="d-flex flex-column align-items-center border-bottom px-5 py-3">
                         <div class="mb-3">
-                            <img class="wd-80 ht-80 rounded-circle" src="https://img.icons8.com/?size=100&id=HEBTcR9O3uzR&format=png&color=000000" alt="">
+                            <img class="wd-80 ht-80 rounded-circle" src="{{ (!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.jpg') }}" alt="">
                         </div>
                         <div class="text-center">
-                            <p class="tx-16 fw-bolder">Amiah Burton</p>
-                            <p class="tx-12 text-muted">amiahburton@gmail.com</p>
+                            <p class="tx-16 fw-bolder">{{ $profileData->name }}</p>
+                            <p class="tx-12 text-muted">{{ $profileData->email }}</p>
                         </div>
                     </div>
                     <ul class="list-unstyled p-1">
@@ -203,9 +237,9 @@
                             </a>
                         </li>
                         <li class="dropdown-item py-2">
-                            <a href="javascript:;" class="text-body ms-0">
+                            <a href="{{ route('admin.change.password') }}" class="text-body ms-0">
                                 <i class="me-2 icon-md" data-feather="edit"></i>
-                                <span>Edit Profile</span>
+                                <span>Change Password</span>
                             </a>
                         </li>
                         <li class="dropdown-item py-2">

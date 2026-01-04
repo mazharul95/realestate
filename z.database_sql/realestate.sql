@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 23, 2025 at 12:29 PM
+-- Generation Time: Jan 04, 2026 at 10:54 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.2.26
 
@@ -125,7 +125,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `photo`, `phone`, `address`, `role`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin', 'admin@gmail.com', '2025-12-30 12:45:48', '$2y$12$7UV58N3clfzAkk13Qmp5U.b.EGnL72AdSqv6apF.GBcycrOg2bl2O', '2026010410132023030321010bfc3c5b20c439c4972383592e1c26bc.jpg', '01611856477', 'Tejgoan,Dhaka-1215', 'admin', 'active', NULL, NULL, '2026-01-04 04:13:48'),
+(2, 'agent', 'agent', 'agent @gmail.com', NULL, '$2y$12$h5w/HcMXXxSKEMtT5wazUefhbkNdbBlc6bY904dr5WGnJGSIvcEQ2', NULL, '01724575773', NULL, 'agent', 'active', NULL, NULL, NULL),
+(3, 'user', 'user', 'user@gmail.com', NULL, '$2y$12$h5w/HcMXXxSKEMtT5wazUefhbkNdbBlc6bY904dr5WGnJGSIvcEQ2', NULL, NULL, NULL, 'user', 'active', NULL, NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
