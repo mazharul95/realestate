@@ -3,6 +3,7 @@
 ----------------------//
 
 ## 04-01-2026
+- Frontend Template Setup done,
 - Admin Profile page & Image update,
 - adding Toaster for view Messages
 - Admin Profile Password change & Update also,

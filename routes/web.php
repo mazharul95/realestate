@@ -3,6 +3,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,14 +15,20 @@ use App\Http\Controllers\AgentController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+//Route::get('/', function () {
+//    return view('auth.login');
+//});
+
+//User Frontend all Route
+Route::get('/', [UserController::class, 'index']);
+
+
+
+//End User Frontend all Route
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -31,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+//Start Admin Group middleware
 Route::middleware(['auth','role:admin'])->group(function () {
     Route::get('/admin/dashboard',[AdminController::class,
         'AdminDashboard'])->name('admin.dashboard');
@@ -49,9 +57,7 @@ Route::middleware(['auth','role:admin'])->group(function () {
 
     Route::post('/admin/update/password', [AdminController::class,
         'AdminUpdatePassword'])->name('admin.update.password');
-
-
-});  //End Group Admin middleware
+});  //End Admin Group middleware
 
 
     //Start Agent Group middleware
