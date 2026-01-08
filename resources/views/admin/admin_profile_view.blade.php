@@ -9,7 +9,10 @@
                     <div class="card-body">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <div>
-                                <img class="wd-100 rounded-circle " src="{{ (!empty($profileData->photo)) ? url('upload/admin_images/'.$profileData->photo) : url('upload/no_image.jpg') }}" alt="profile">
+                                <img class="wd-100 rounded-circle " src="{{ (!empty($profileData->photo)) ?
+                                        url('upload/admin_images/'.$profileData->photo) :
+                                            url('upload/no_image.jpg') }}" alt="profile">
+
                                 <span class="h4 ms-3">{{ $profileData->username }}</span>
                             </div>
                         </div>

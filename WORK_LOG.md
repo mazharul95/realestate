@@ -2,6 +2,20 @@
 # 📌 Project WorkLog
 ----------------------//
 
+## 08-01-2026 (05/06-01-2026 uncomited task)
+- User Profile page Setup done,
+- user create form and data store method working,done 
+- User Profile page & Image update,
+- adding Toaster for view Messages
+
+
+## 04-01-2026
+- Frontend Template Setup done,
+- Admin Profile page & Image update,
+- adding Toaster for view Messages
+- Admin Profile Password change & Update also,
+- Take Backup And Restore in Localhost
+
 ## 04-01-2026
 - Frontend Template Setup done,
 - Admin Profile page & Image update,
