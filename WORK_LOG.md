@@ -2,6 +2,12 @@
 # 📌 Project WorkLog
 ----------------------//
 
+## 11-01-2026
+- User Profile Password Reset,
+- Update User Login Setup with and without Login
+- User Login and Logout Notification
+
+
 ## 08-01-2026 (05/06-01-2026 uncomited task)
 - User Profile page Setup done,
 - user create form and data store method working,done 
