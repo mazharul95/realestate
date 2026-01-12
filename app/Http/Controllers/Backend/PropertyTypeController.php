@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
@@ -16,49 +15,49 @@ class PropertyTypeController extends Controller
 
     public function AddType()
     {
-        return view('backend.type.addEditTypePage');
+        $lastIcon = PropertyType::orderBy('id', 'desc')->value('type_icon');
+        if ($lastIcon && preg_match('/Icon-(\d+)/', $lastIcon, $matches)) {
+            $nextNumber = (int) $matches[1] + 1;
+        } else {
+            $nextNumber = 1;
+        }
+        $nextTypeIcon = 'Icon-' . $nextNumber;
+
+        return view('backend.type.addEditTypePage', compact('nextTypeIcon'));
     }
 
     public function StoreType(Request $request)
     {
-        // Validation
-        $request->validate([
-            'type_name' => 'required|unique:property_types|max:200',
-            'type_icon' => 'required'
-        ]);
+        DB::transaction(function () use ($request) {
 
-        PropertyType::insert([
+            $request->validate([
+                'type_name' => 'required|unique:property_types|max:200',
+                'type_icon' => 'required|unique:property_types,type_icon',
+            ]);
 
-            'type_name' => $request->type_name,
-            'type_icon' => $request->type_icon,
-            'status' => 'active' // default active
-        ]);
+            PropertyType::create([
+                'type_name' => $request->type_name,
+                'type_icon' => $request->type_icon,
+                'status' => 'active'
+            ]);
+        });
 
-        $notification = array(
+        return redirect()->route('all.type')->with([
             'message' => 'Property Type Create Successfully',
             'alert-type' => 'success'
-        );
-
-        return redirect()->route('all.type')->with($notification);
-
+        ]);
     }// End Method
-
 
     public function EditType($id)
     {
-
         $types = PropertyType::findOrFail($id);
         return view('backend.type.addEditTypePage', compact('types'));
-
     }// End Method
 
     public function UpdateType(Request $request)
     {
-
         $pid = $request->id;
-
         PropertyType::findOrFail($pid)->update([
-
             'type_name' => $request->type_name,
             'type_icon' => $request->type_icon,
         ]);
@@ -67,11 +66,9 @@ class PropertyTypeController extends Controller
             'message' => 'Property Type Updated Successfully',
             'alert-type' => 'success'
         );
-
         return redirect()->route('all.type')->with($notification);
 
     }// End Method
-
 
     // Combined Delete Function
     public function DeleteType($id)

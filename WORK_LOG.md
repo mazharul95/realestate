@@ -1,6 +1,10 @@
 ----------------------//
 # 📌 Project WorkLog
 ----------------------//
+## 12-01-2026
+- Some Changes: web.php, PropertyTypeController:store function modify,
+- sidebar and blade file also
+- Backend Property Type Feature Full Crud Done
 
 ## 11-01-2026
 - User Profile Password Reset,

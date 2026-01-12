@@ -42,11 +42,11 @@
 
                                 <div class="mb-3">
                                     <label for="type_icon" class="form-label">Type Icon</label>
-                                    <input type="text"
+                                    <input type="readonly"
                                            name="type_icon"
                                            id="type_icon"
                                            class="form-control @error('type_icon') is-invalid @enderror"
-                                           value="{{ old('type_icon', isset($types) ? $types->type_icon : '') }}">
+                                           value="{{ old('type_icon', isset($types) ? $types->type_icon : $nextTypeIcon) }}">
                                     @error('type_icon')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('property_types', function (Blueprint $table) {
             $table->id();
             $table->string('type_name');
-            $table->string('type_icon')->nullable();
+            $table->string('type_icon')->unique();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });

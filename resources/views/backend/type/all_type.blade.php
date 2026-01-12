@@ -2,7 +2,6 @@
 @section('admin')
 
     <div class="page-content">
-
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
                 <a href="{{ route('add.type') }}" class="btn btn-inverse-info">Add Property Type</a>
@@ -21,28 +20,28 @@
                                     <th>SL</th>
                                     <th>Type_Name</th>
                                     <th>Type_icon</th>
-                                    <th colspan="3">Action</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($types as $key => $item)
-                                <tr>
-                                    <td >{{ $key+1 }}</td>
-                                    <td>{{ $item->type_name }}</td>
-                                    <td>{{ $item->type_icon }}</td>
-                                    <td>
-                                        <a href="{{ route('edit.type',$item->id) }}" class="btn btn-inverse-warning"> Edit </a>
-{{--                                        <a href="{{ route('delete.type',$item->id) }}" class="btn btn-inverse-danger" id="delete"> Delete </a>--}}
-                                        <a href="{{ route('delete.type', $item->id) }}"
-                                           class="btn btn-inverse-danger btn-sm"
-                                           id="delete">
-                                            <i class="link-icon" data-feather="trash-2"></i>
-                                        </a>
-                                    </td>
+                                    @foreach($types as $key => $item)
+                                        <tr>
+                                            <td >{{ $key+1 }}</td>
+                                            <td>{{ $item->type_name }}</td>
+                                             <td>{{ $item->type_icon }}</td>
+                                            <td>
+                                             <a href="{{ route('edit.type',$item->id) }}"
+                                                class="btn btn-inverse-warning"> Edit </a>
 
-                                </tr>
+                                             <a href="{{ route('delete.type', $item->id) }}"
+                                              class="btn btn-inverse-danger btn-sm"
+                                              id="delete">
+                                              <i class="link-icon" data-feather="trash-2"></i>
+                                             </a>
+                                            </td>
 
-                                @endforeach
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
