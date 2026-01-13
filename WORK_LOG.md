@@ -1,6 +1,15 @@
 ----------------------//
 # 📌 Project WorkLog
 ----------------------//
+
+
+
+
+## 13-01-2026
+- Amenities full Crud done with soft delete
+- Add Validation Message
+- sidebar and blade file also
+
 ## 12-01-2026
 - Some Changes: web.php, PropertyTypeController:store function modify,
 - sidebar and blade file also
