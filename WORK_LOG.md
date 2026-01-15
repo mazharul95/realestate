@@ -1,7 +1,11 @@
 ----------------------//
 # 📌 Project WorkLog
 ----------------------//
-
+## 13-01-2026
+- Property  full Crud done
+- side bar modifued
+- make Property model,migration and Controller,
+- added Index_property page and AddEditProperty.blade.php page 
 
 
 
