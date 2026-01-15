@@ -24,26 +24,22 @@ class PropertyTypeController extends Controller
             $nextNumber = 1;
         }
         $nextTypeIcon = 'Icon-' . $nextNumber;
-
         return view('backend.type.addEditTypePage', compact('nextTypeIcon'));
     }
 
     public function StoreType(Request $request)
     {
         DB::transaction(function () use ($request) {
-
             $request->validate([
                 'type_name' => 'required|unique:property_types|max:200',
                 'type_icon' => 'required|unique:property_types,type_icon',
             ]);
-
             PropertyType::create([
                 'type_name' => $request->type_name,
                 'type_icon' => $request->type_icon,
                 'status' => 'active'
             ]);
         });
-
         return redirect()->route('all.type')->with([
             'message' => 'Property Type Create Successfully',
             'alert-type' => 'success'
@@ -63,7 +59,6 @@ class PropertyTypeController extends Controller
             'type_name' => $request->type_name,
             'type_icon' => $request->type_icon,
         ]);
-
         $notification = array(
             'message' => 'Property Type Updated Successfully',
             'alert-type' => 'success'
@@ -78,23 +73,19 @@ class PropertyTypeController extends Controller
         PropertyType::findOrFail($id)->update([
             'status' => 'inactive'
         ]);
-
         $notification = [
             'message' => 'Property Type Deleted Successfully',
             'alert-type' => 'success'
         ];
-
         return redirect()->back()->with($notification);
     }
 
 
     ///////////// Amenitites All Method //////////////
     public function AllAmenitie(){
-
         $amenities = Amenities::where('status', 'active')
             ->orderBy('id', 'DESC')
             ->get();
-
         return view('backend.amenities.all_amenities',compact('amenities'));
 
     } // End Method
@@ -112,41 +103,32 @@ class PropertyTypeController extends Controller
             'amenitis_name.required' => 'Amenity name is required',
             'amenitis_name.unique'   => 'This amenity already exists',
         ]);
-
         // Insert
         Amenities::create([
             'amenitis_name' => $request->amenitis_name,
             'status' => 'active'
         ]);
-
         $notification = [
             'message' => 'Amenities Create Successfully',
             'alert-type' => 'success'
         ];
-
         return redirect()->route('all.amenitie')->with($notification);
     }
 
     public function EditAmenitie($id){
-
         $amenities = Amenities::findOrFail($id);
         return view('backend.amenities.addEditAmenities', compact('amenities'));
-
     }// End Method
 
-
     public function UpdateAmenitie(Request $request){
-
         $ame_id = $request->id;
         Amenities::findOrFail($ame_id)->update([
             'amenitis_name' => $request->amenitis_name,
         ]);
-
         $notification = array(
             'message' => 'Amenities Updated Successfully',
             'alert-type' => 'success'
         );
-
         return redirect()->route('all.amenitie')->with($notification);
 
     }// End Method
