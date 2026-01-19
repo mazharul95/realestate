@@ -88,10 +88,5 @@ use App\Http\Controllers\Backend\PropertyController;
     Route::get('/edit/property/{id}', 'EditProperty')->name('edit.property');
     Route::put('/update/property/{id}', 'UpdateProperty')->name('update.property');
 
-
-
-
-
-
     });
 }); // End Group Admin Middleware

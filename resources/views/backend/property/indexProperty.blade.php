@@ -1,9 +1,7 @@
 @extends('admin.admin_dashboard')
 @section('admin')
 
-
     <div class="page-content">
-
         <nav class="page-breadcrumb">
             <ol class="breadcrumb">
                 <a href="{{ route('add.property') }}" class="btn btn-inverse-info"> Add Property</a>
@@ -60,15 +58,6 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-
-
-
-
-
-
-
 
 @endsection
