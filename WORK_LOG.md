@@ -2,6 +2,16 @@
 # 📌 Project WorkLog
 ----------------------//
 
+## 19-01-2026
+- AddEditProperty page load select2 input data and also multiple select inputed at a time;  
+- Modified Property Controller,
+- modified AddEditProperty.blade.php page
+-
+## 15-01-2026
+- Property full Crud done
+- side bar modifued
+- make Property model,migration and Controller,
+- added Index_property page and AddEditProperty.blade.php page 
 
 
 

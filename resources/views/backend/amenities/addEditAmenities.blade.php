@@ -10,7 +10,7 @@
                         <div class="card-body">
 
                             <h6 class="card-title">
-                                {{ isset($amenities) ? 'Edit Amenities' : 'Add Amenities' }}
+                                {{ isset($amenities) ? 'Edit Property' : 'Add Property' }}
                             </h6>
 
                             <form method="POST"

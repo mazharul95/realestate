@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 04, 2026 at 10:54 AM
+-- Generation Time: Jan 15, 2026 at 12:20 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.2.26
 
@@ -20,6 +20,51 @@ SET time_zone = "+00:00";
 --
 -- Database: `realestate`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `amenities`
+--
+
+DROP TABLE IF EXISTS `amenities`;
+CREATE TABLE IF NOT EXISTS `amenities` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `amenitis_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('active','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `amenities_amenitis_name_unique` (`amenitis_name`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `amenities`
+--
+
+INSERT INTO `amenities` (`id`, `amenitis_name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Amenities 1', 'active', NULL, NULL),
+(2, 'Amenities 2', 'active', '2026-01-13 07:20:37', '2026-01-13 08:19:41'),
+(3, 'Amenities 3', 'active', '2026-01-13 07:36:06', '2026-01-13 07:36:18'),
+(4, 'Amenities 5', 'inactive', '2026-01-13 08:09:15', '2026-01-14 00:41:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `facilities`
+--
+
+DROP TABLE IF EXISTS `facilities`;
+CREATE TABLE IF NOT EXISTS `facilities` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `property_id` int NOT NULL,
+  `facility_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `distance` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('active','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -52,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -62,7 +107,29 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
-(4, '2019_12_14_000001_create_personal_access_tokens_table', 1);
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(5, '2026_01_12_062646_create_property_types_table', 2),
+(9, '2026_01_15_084257_create_properties_table', 4),
+(8, '2026_01_13_102734_create_amenities_table', 3),
+(10, '2026_01_15_104856_create_multi_images_table', 4),
+(11, '2026_01_15_104931_create_facilities_table', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `multi_images`
+--
+
+DROP TABLE IF EXISTS `multi_images`;
+CREATE TABLE IF NOT EXISTS `multi_images` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `property_id` int NOT NULL,
+  `photo_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('active','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -104,6 +171,82 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `properties`
+--
+
+DROP TABLE IF EXISTS `properties`;
+CREATE TABLE IF NOT EXISTS `properties` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ptype_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amenities_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `property_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `property_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `property_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `property_status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lowest_price` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `max_price` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `property_thambnail` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `short_descp` text COLLATE utf8mb4_unicode_ci,
+  `long_descp` text COLLATE utf8mb4_unicode_ci,
+  `bedrooms` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bathrooms` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `garage` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `garage_size` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `property_size` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `property_video` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `postal_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `neighborhood` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `latitude` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `longitude` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `featured` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `hot` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `agent_id` int DEFAULT NULL,
+  `status` enum('active','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `property_types`
+--
+
+DROP TABLE IF EXISTS `property_types`;
+CREATE TABLE IF NOT EXISTS `property_types` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `type_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type_icon` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` enum('active','inactive') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'active',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `property_types`
+--
+
+INSERT INTO `property_types` (`id`, `type_name`, `type_icon`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Appertment villa', 'Icon-1', 'active', NULL, '2026-01-12 06:13:10'),
+(2, 'Office', 'Icon-2', 'active', NULL, NULL),
+(3, 'Residential', 'Icon-3', 'inactive', NULL, '2026-01-13 07:38:59'),
+(4, 'Commercial', 'Icon-4', 'inactive', NULL, '2026-01-12 05:59:07'),
+(5, 'Duplex', 'Icon-5', 'active', NULL, NULL),
+(6, 'Floor', 'Icon-6', 'active', NULL, '2026-01-12 05:02:24'),
+(7, 'Building Code', 'Icon-7', 'inactive', NULL, NULL),
+(8, 'Industrial', 'Icon-8', 'inactive', NULL, '2026-01-14 00:27:25'),
+(9, 'Warehouse', 'Icon-9', 'inactive', NULL, '2026-01-14 00:19:37'),
+(10, 'Building Rent', 'Icon-10', 'active', '2026-01-13 03:20:22', '2026-01-13 03:20:22'),
+(11, 'Shared Office', 'Icon-11', 'active', '2026-01-13 06:32:23', '2026-01-13 06:32:23');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -125,16 +268,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `password`, `photo`, `phone`, `address`, `role`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin', 'admin@gmail.com', '2025-12-30 12:45:48', '$2y$12$7UV58N3clfzAkk13Qmp5U.b.EGnL72AdSqv6apF.GBcycrOg2bl2O', '2026010410132023030321010bfc3c5b20c439c4972383592e1c26bc.jpg', '01611856477', 'Tejgoan,Dhaka-1215', 'admin', 'active', NULL, NULL, '2026-01-04 04:13:48'),
+(1, 'admin', 'admin', 'admin@gmail.com', '2025-12-30 12:45:48', '$2y$12$7UV58N3clfzAkk13Qmp5U.b.EGnL72AdSqv6apF.GBcycrOg2bl2O', '2026011208421.jpg', '01611856477', 'Tejgoan,Dhaka-1215', 'admin', 'active', NULL, NULL, '2026-01-12 02:42:11'),
 (2, 'agent', 'agent', 'agent @gmail.com', NULL, '$2y$12$h5w/HcMXXxSKEMtT5wazUefhbkNdbBlc6bY904dr5WGnJGSIvcEQ2', NULL, '01724575773', NULL, 'agent', 'active', NULL, NULL, NULL),
-(3, 'user', 'user', 'user@gmail.com', NULL, '$2y$12$h5w/HcMXXxSKEMtT5wazUefhbkNdbBlc6bY904dr5WGnJGSIvcEQ2', NULL, NULL, NULL, 'user', 'active', NULL, NULL, NULL);
+(3, 'user2', 'user 2', 'user2@gmail.com', NULL, '$2y$12$ANhRLJH8uvxTBw4HS.dI4ub5D43ZeAWUKnEyDOEZCI5KdU4f1W1HG', '2026010812021.jpg', '01611856477', 'motijheel', 'user', 'active', NULL, NULL, '2026-01-11 06:32:38'),
+(4, 'khan', 'khan', 'khan@gmail.com', NULL, '$2y$12$JvhZZ07MRNMdk2XHhff6auO6cxWabCPK1yJHeNRe3GFZm8Z5IQh1K', NULL, '01712345678', 'lalmatia', 'user', 'active', NULL, '2026-01-08 03:09:30', '2026-01-08 03:09:30');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
