@@ -2,6 +2,12 @@
 # 📌 Project WorkLog
 ----------------------//
 
+## 20-01-2026
+- modified AddEditProperty.blade.php page
+- Modified web.php
+- AddEditProperty page load js script field validator, -
+       -also(backend/asset/js/code/....)file loaded ;
+
 ## 19-01-2026
 - AddEditProperty page load select2 input data and also multiple select inputed at a time;  
 - Modified Property Controller,

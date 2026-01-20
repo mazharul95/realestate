@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 15, 2026 at 12:20 PM
+-- Generation Time: Jan 20, 2026 at 11:52 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.2.26
 
@@ -46,7 +46,7 @@ INSERT INTO `amenities` (`id`, `amenitis_name`, `status`, `created_at`, `updated
 (1, 'Amenities 1', 'active', NULL, NULL),
 (2, 'Amenities 2', 'active', '2026-01-13 07:20:37', '2026-01-13 08:19:41'),
 (3, 'Amenities 3', 'active', '2026-01-13 07:36:06', '2026-01-13 07:36:18'),
-(4, 'Amenities 5', 'inactive', '2026-01-13 08:09:15', '2026-01-14 00:41:32');
+(4, 'Amenities 4', 'active', '2026-01-13 08:09:15', '2026-01-14 00:41:32');
 
 -- --------------------------------------------------------
 
@@ -192,6 +192,7 @@ CREATE TABLE IF NOT EXISTS `properties` (
   `bathrooms` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `garage` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `garage_size` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `amenitis_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `property_size` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `property_video` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
