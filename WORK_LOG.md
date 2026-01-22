@@ -2,6 +2,11 @@
 # 📌 Project WorkLog
 ----------------------//
 
+## 22-01-2026
+- Image intervetion package
+- Property Insert/store successful in database
+- Manage property Read/(indexing) all product.
+
 ## 20-01-2026
 - modified AddEditProperty.blade.php page
 - Modified web.php

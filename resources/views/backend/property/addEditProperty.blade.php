@@ -39,24 +39,24 @@
                                     <div class="col-sm-6">
                                         <div class="form-group mb-3">
                                             <label class="form-label">Lowest Price</label>
-                                            <input type="text" name="lowest_price" class="form-control" value="{{ $property->lowest_price ?? old('lowest_price') }}">
+                                            <input type="number" name="lowest_price" class="form-control" value="{{ $property->lowest_price ?? old('lowest_price') }}">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <div class="form-group mb-3">
                                             <label class="form-label">Max Price</label>
-                                            <input type="text" name="max_price" class="form-control" value="{{ $property->max_price ?? old('max_price') }}">
+                                            <input type="number" name="max_price" class="form-control" value="{{ $property->max_price ?? old('max_price') }}">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-6">
                                         <div class="form-group mb-3">
                                             <label class="form-label">Main Thumbnail</label>
-                                            <input type="file" name="property_thambnail " class="form-control" onChange="mainThamUrl(this)"  >
+                                            <input type="file" name="property_thambnail" class="form-control" onChange="mainThamUrl(this)"  >
                                             <img src="" id="mainThmb">
-                                            @if(isset($property) && $property->main_thumbnail)
-                                                <img src="{{ asset($property->main_thumbnail) }}" style="width:100px; height:100px; margin-top:10px;">
+                                            @if(isset($property) && $property->property_thambnail)
+                                                <img src="{{ asset($property->property_thambnail) }}" style="width:100px; height:100px; margin-top:10px;">
                                             @endif
 
                                         </div>
@@ -220,14 +220,14 @@
                                 <div class="col-sm-12">
                                     <div class="form-group mb-3">
                                         <label class="form-label">Short Description</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        <textarea name="short_descp" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                     </div>
                                 </div><!-- Col -->
 
                                 <div class="col-sm-12">
                                     <div class="form-group mb-3">
                                         <label class="form-label">Long Description</label>
-                                        <textarea class="form-control" name="tinymce" id="tinymceExample" rows="10"></textarea>
+                                        <textarea dirname="long_descp" class="form-control" name="tinymce" id="tinymceExample" rows="10"></textarea>
                                     </div>
                                 </div><!-- Col -->
 
