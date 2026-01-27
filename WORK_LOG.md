@@ -2,6 +2,22 @@
 # 📌 Project WorkLog
 ----------------------//
 
+## 27-01-2026 
+
+- Property Update method done successful in database only input filed;
+- separatly UpdatePropertyMultiImage funtion are created and workable 
+- separatly item wise PropertyMultiImageDelete function create and workable,
+- addEditProperty page 3rd layout include to Add Multi image in property,
+
+## 25-01-2026 and 26-01-2026
+- addEditProperty page layout divided two layout:
+  i)  input field are upper layout and
+  ii) lower layout are thambnil and multi image.
+
+- separatly UpdatePropertyThambnail funtion are created and workable
+- separatly UpdatePropertyThambnail image function added new logic implemented; 
+
+
 ## 22-01-2026
 - Image intervetion package
 - Property Insert/store successful in database

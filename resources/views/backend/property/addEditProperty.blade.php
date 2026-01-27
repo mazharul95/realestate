@@ -17,6 +17,8 @@
                                     @method('PUT')
                                 @endif
 
+                                <input type="hidden" name="id" value="{{ $property->id }}">
+
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group mb-3">
@@ -49,47 +51,20 @@
                                             <input type="number" name="max_price" class="form-control" value="{{ $property->max_price ?? old('max_price') }}">
                                         </div>
                                     </div>
-
-                                    <div class="col-sm-6">
-                                        <div class="form-group mb-3">
-                                            <label class="form-label">Main Thumbnail</label>
-                                            <input type="file" name="property_thambnail" class="form-control" onChange="mainThamUrl(this)"  >
-                                            <img src="" id="mainThmb">
-                                            @if(isset($property) && $property->property_thambnail)
-                                                <img src="{{ asset($property->property_thambnail) }}" style="width:100px; height:100px; margin-top:10px;">
-                                            @endif
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <div class="form-group mb-3">
-                                            <label class="form-label">Multiple Image</label>
-                                            <input type="file" name="multi_img[]" class="form-control" id="multiImg" multiple="" >
-                                            @if(isset($property) && $property->multi_img)
-                                                <div style="margin-top:10px;">
-                                                    @foreach(json_decode($property->multi_img) as $img)
-                                                        <img src="{{ asset($img) }}" style="width:80px; height:80px; margin-right:5px;">
-                                                    @endforeach
-                                                </div>
-                                            @endif
-                                            <div class="row" id="preview_img"> </div>
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="form-group mb-3">
                                             <label class="form-label">Bedrooms</label>
-                                            <input type="text" name="bedrooms" class="form-control" value="{{ $property->state ?? old('bedrooms') }}">
+                                            <input type="text" name="bedrooms" class="form-control" value="{{ $property->bedrooms ?? old('bedrooms') }}">
                                         </div>
                                     </div>
 
                                     <div class="col-sm-3">
                                         <div class="form-group mb-3">
                                             <label class="form-label">Bathrooms</label>
-                                            <input type="text" name="bathrooms" class="form-control" value="{{ $property->state ?? old('bathrooms') }}">
+                                            <input type="text" name="bathrooms" class="form-control" value="{{ $property->bathrooms ?? old('bathrooms') }}">
                                         </div>
                                     </div>
 
@@ -185,7 +160,8 @@
                                             <select name="ptype_id" class="form-select" id="exampleFormControlSelect1">
                                                 <option selected="" disabled="">Select Type</option>
                                                 @foreach($propertytype as $ptype)
-                                                    <option value="{{ $ptype->id }}">{{ $ptype->type_name }}</option>
+{{--                                                    <option value="{{ $ptype->id }}">{{ $ptype->type_name }}</option>--}}
+                                                    <option value="{{ $ptype->id }}" {{ $ptype->id == $property->ptype_id ? 'selected' : '' }}>{{ $ptype->type_name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -197,7 +173,9 @@
                                             <select name="amenities_id[]" class="js-example-basic-multiple form-select" multiple="multiple" data-width="100%">
 
                                                 @foreach($amenities as $ameni)
-                                                    <option value="{{ $ameni->id }}">{{ $ameni->amenitis_name }}</option>
+                                                    <option value="{{ $ameni->id }}" {{ (in_array($ameni->id,$property_ami)) ? 'selected' : '' }} >
+                                                                    {{ $ameni->amenitis_name }}
+                                                    </option>
                                                 @endforeach
 
                                             </select>
@@ -210,7 +188,7 @@
                                             <select name="agent_id" class="form-select" id="exampleFormControlSelect1">
                                                 <option selected="" disabled="">Select Agent</option>
                                                 @foreach($activeAgent as $agent)
-                                                    <option value="{{ $agent->id }}">{{ $agent->name }}</option>
+                                                    <option value="{{ $agent->id }}" {{ $agent->id == $property->agent_id ? 'selected' : '' }}>{{ $agent->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -220,29 +198,32 @@
                                 <div class="col-sm-12">
                                     <div class="form-group mb-3">
                                         <label class="form-label">Short Description</label>
-                                        <textarea name="short_descp" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                        <textarea name="short_descp" class="form-control" id="exampleFormControlTextarea1" rows="3" >{{ $property->short_descp }} </textarea>
                                     </div>
                                 </div><!-- Col -->
 
                                 <div class="col-sm-12">
                                     <div class="form-group mb-3">
                                         <label class="form-label">Long Description</label>
-                                        <textarea dirname="long_descp" class="form-control" name="tinymce" id="tinymceExample" rows="10"></textarea>
+                                        <textarea dirname="long_descp" class="form-control" name="tinymce" id="tinymceExample" rows="10">{{ $property->long_descp }} </textarea>
                                     </div>
                                 </div><!-- Col -->
 
                                 <hr>
 
-                                <div class="form-group mb-3">
+                                <hr>
+
+                                <div class="mb-3">
                                     <div class="form-check form-check-inline">
-                                        <input type="checkbox" name="featured" value="1" class="form-check-input" id="checkInline1">
+                                        <input type="checkbox" name="featured" value="1" class="form-check-input" id="checkInline1" {{ $property->featured == '1' ? 'checked' : '' }} >
                                         <label class="form-check-label" for="checkInline1">
                                             Features Property
                                         </label>
                                     </div>
 
+
                                     <div class="form-check form-check-inline">
-                                        <input type="checkbox" name="hot" value="1" class="form-check-input" id="checkInline">
+                                        <input type="checkbox" name="hot" value="1" class="form-check-input" id="checkInline" {{ $property->hot == '1' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="checkInline">
                                             Hot Property
                                         </label>
@@ -294,43 +275,138 @@
 
 
 
-    <!--========== Start of add multiple class with ajax ==============-->
-    <div style="visibility: hidden">
-        <div class="whole_extra_item_add" id="whole_extra_item_add">
-            <div class="whole_extra_item_delete" id="whole_extra_item_delete">
-                <div class="container mt-2">
-                    <div class="row">
+    <!--  /// Property Main Thambnail Image Update //// -->
 
-                        <div class="form-group col-md-4">
-                            <label for="facility_name">Facilities</label>
-                            <select name="facility_name[]" id="facility_name" class="form-control">
-                                <option value="">Select Facility</option>
-                                <option value="Hospital">Hospital</option>
-                                <option value="SuperMarket">Super Market</option>
-                                <option value="School">School</option>
-                                <option value="Entertainment">Entertainment</option>
-                                <option value="Pharmacy">Pharmacy</option>
-                                <option value="Airport">Airport</option>
-                                <option value="Railways">Railways</option>
-                                <option value="Bus Stop">Bus Stop</option>
-                                <option value="Beach">Beach</option>
-                                <option value="Mall">Mall</option>
-                                <option value="Bank">Bank</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="distance">Distance</label>
-                            <input type="text" name="distance[]" id="distance" class="form-control" placeholder="Distance (Km)">
-                        </div>
-                        <div class="form-group col-md-4" style="padding-top: 20px">
-                            <span class="btn btn-success btn-sm addeventmore"><i class="fa fa-plus-circle">Add</i></span>
-                            <span class="btn btn-danger btn-sm removeeventmore"><i class="fa fa-minus-circle">Remove</i></span>
+    <div class="page-content" style="margin-top: -35px;" >
+
+        <div class="row profile-body">
+            <div class="col-md-12 col-xl-12 middle-wrapper">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">Edit Main Thambnail Image</h6>
+
+
+                            <form action="{{ isset($property) ? route('update.property.thambnail', $property->id) : route('store.property') }}" method="POST" enctype="multipart/form-data" id="myForm">
+                                @csrf
+
+                                <input type="hidden" name="id" value="{{ $property->id }}">
+                                <input type="hidden" name="old_img" value="{{ $property->property_thambnail }}" >
+
+                                <div class="row mb-3">
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">Main Thambnail </label>
+                                        <input type="file" name="property_thambnail" class="form-control" onChange="mainThamUrl(this)"  >
+                                        <img src="" id="mainThmb">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label class="form-label">  </label>
+                                        <img src="{{ asset($property->property_thambnail) }}" style="width:100px; height:100px;">
+                                    </div>
+                                </div><!-- Col -->
+
+                                <button type="submit" class="btn btn-primary">{{ isset($property) ? 'Update Property' : 'Add Property' }}</button>
+                            </form>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+
+
+    <!--  /// Property Multi Image Update //// -->
+
+    <div class="page-content" style="margin-top: -35px;" >
+
+        <div class="row profile-body">
+            <div class="col-md-12 col-xl-12 middle-wrapper">
+                <div class="row">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">Edit Multi Image  </h6>
+
+                            <form action="{{ isset($property) ? route('update.property.multiImage', $property->id) : route('store.property') }}" method="POST" enctype="multipart/form-data" id="myForm">
+
+                                @csrf
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Sl</th>
+                                            <th>Image</th>
+                                            <th>Change Image </th>
+                                            <th>Delete </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        @foreach($multiImage as $key => $img)
+                                            <tr>
+                                                <td>{{ $key+1 }}</td>
+
+                                                <td class="py-1">
+                                                    <img src="{{ asset($img->photo_name) }}" alt="image"  style="width:50px; height:50px;">
+                                                </td>
+
+                                                <td>
+                                                    <input type="file" class="form-control" name="multi_img[{{ $img->id }}]">
+                                                </td>
+                                                <td>
+                                                    <input type="submit" class="btn btn-primary px-4" value="Update Image" >
+
+                                                    <a href="{{ route('property.multiimg.delete',$img->id) }}" class="btn btn-danger" id="delete">Delete </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <br><br>
+{{--                                <button type="submit" class="btn btn-primary">Save Changes </button>--}}
+{{--                                <button type="submit" class="btn btn-primary">{{ isset($property) ? 'Update Image' : 'Add Image' }}</button>--}}
+                            </form>
+
+
+                            <form method="post" action="{{ route('store.new.multiImage') }}" id="myForm" enctype="multipart/form-data">
+                                @csrf
+
+                                <input type="hidden" name="imageid" value="{{ $property->id }}">
+
+                                <table class="table table-striped">
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="file" class="form-control" name="multi_img">
+                                        </td>
+
+                                        <td>
+                                            <input type="submit" class="btn btn-info px-4" value="Add Image" >
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--  /// End Property Multi Image Update //// -->
+
+
 
 
 
@@ -436,7 +512,10 @@
     </script>
 
 
+
+
     <script>
+
         $(document).ready(function(){
             $('#multiImg').on('change', function(){ //on file input change
                 if (window.File && window.FileReader && window.FileList && window.Blob) //check File API supported browser
@@ -462,6 +541,8 @@
                 }
             });
         });
+
     </script>
+
 
 @endsection

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 20, 2026 at 11:52 AM
+-- Generation Time: Jan 27, 2026 at 12:19 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.2.26
 
@@ -64,7 +64,16 @@ CREATE TABLE IF NOT EXISTS `facilities` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `facilities`
+--
+
+INSERT INTO `facilities` (`id`, `property_id`, `facility_name`, `distance`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Airport', '1', 'active', '2026-01-22 06:16:33', '2026-01-22 06:16:33'),
+(2, 1, 'School', '1', 'active', '2026-01-22 06:16:33', '2026-01-22 06:16:33'),
+(3, 1, 'Hospital', '1', 'active', '2026-01-22 06:16:33', '2026-01-22 06:16:33');
 
 -- --------------------------------------------------------
 
@@ -129,7 +138,17 @@ CREATE TABLE IF NOT EXISTS `multi_images` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `multi_images`
+--
+
+INSERT INTO `multi_images` (`id`, `property_id`, `photo_name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 'upload/property/multi-image/1855464520636352.png', 'active', '2026-01-22 06:16:33', '2026-01-27 04:14:19'),
+(2, 1, 'upload/property/multi-image/1855019226778161.jpg', 'active', '2026-01-22 06:16:33', NULL),
+(4, 1, 'upload/property/multi-image/1855467109296146.jpg', 'active', '2026-01-27 04:55:27', NULL),
+(5, 1, 'upload/property/multi-image/1855467139724115.jpg', 'active', '2026-01-27 04:55:56', NULL);
 
 -- --------------------------------------------------------
 
@@ -209,7 +228,15 @@ CREATE TABLE IF NOT EXISTS `properties` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `properties`
+--
+
+INSERT INTO `properties` (`id`, `ptype_id`, `amenities_id`, `property_name`, `property_slug`, `property_code`, `property_status`, `lowest_price`, `max_price`, `property_thambnail`, `short_descp`, `long_descp`, `bedrooms`, `bathrooms`, `garage`, `garage_size`, `amenitis_name`, `property_size`, `property_video`, `address`, `city`, `state`, `postal_code`, `neighborhood`, `latitude`, `longitude`, `featured`, `hot`, `agent_id`, `status`, `created_at`, `updated_at`) VALUES
+(1, '11', '3,2,1', 'vnv', 'vnv', 'PC001', 'rent', '11', '111', 'upload/property/thambnail/1855016378668011.jpg', 'xzCVfdzs', 'ltr', '4', '4', '4', '1000', NULL, '1111', 'bkba', 'dhaka', 'dhaka', 'dhaka', '1205', 'rohim', '11', '111', '1', '1', 2, 'active', '2026-01-22 05:31:17', NULL),
+(2, '10', '4,2,1', 'ma n', 'ma-n', 'PC003', 'rent', '77', '777', 'upload/property/thambnail/1855383433107462.jpg', 'xzCVfdzs xcvbxcbxcb 222', 'ltr', '3', '2', '1', '150', NULL, '222', 'bkbaxcvzxc22', 'dhaka 1', 'dhaka', 'dhaka', '1205', 'rohim22', '11', '111', '1', '1', 2, 'active', '2026-01-22 05:56:07', '2026-01-26 06:45:27');
 
 -- --------------------------------------------------------
 

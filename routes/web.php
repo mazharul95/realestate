@@ -85,8 +85,15 @@ use App\Http\Controllers\Backend\PropertyController;
     Route::get('/all/property', 'AllProperty')->name('all.property');
     Route::get('/add/property', 'AddProperty')->name('add.property');
     Route::post('/store/property', 'StoreProperty')->name('store.property');
-//    Route::get('/edit/property/{id}', 'EditProperty')->name('edit.property');
-//    Route::put('/update/property/{id}', 'UpdateProperty')->name('update.property');
+    Route::get('/edit/property/{id}', 'EditProperty')->name('edit.property');
+    Route::post('/update/property', 'UpdateProperty')->name('update.property');
+    //Route::put('/update/property/{id}', 'UpdateProperty')->name('update.property');
+    Route::post('/update/property/thambnail', 'UpdatePropertyThambnail')->name('update.property.thambnail');
+    Route::post('/update/property/multiImage', 'UpdatePropertyMultiImage')->name('update.property.multiImage');
+    Route::get('/property/multiimg/delete/{id}', 'PropertyMultiImageDelete')->name('property.multiimg.delete');
 
+    Route::post('/store/new/multiImage', 'StoreNewMultiImage')->name('store.new.multiImage');
     });
+
+
 }); // End Group Admin Middleware
