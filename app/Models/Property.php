@@ -14,5 +14,9 @@ class Property extends Model
     {
         return $this->belongsTo(PropertyType::class, 'ptype_id', 'id');
     }
+    public function facilities()
+    {
+        return $this->hasMany(Facility::class);
+    }
 
 }

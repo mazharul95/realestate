@@ -93,6 +93,13 @@ use App\Http\Controllers\Backend\PropertyController;
     Route::get('/property/multiimg/delete/{id}', 'PropertyMultiImageDelete')->name('property.multiimg.delete');
 
     Route::post('/store/new/multiImage', 'StoreNewMultiImage')->name('store.new.multiImage');
+    Route::post('/update/property/facilities', 'UpdatePropertyFacilities')->name('update.property.facilities');
+    Route::get('/delete/property/{id}', 'DeleteProperty')->name('delete.property');
+    Route::get('/details/property/{id}', 'DetailsProperty')->name('details.property');
+
+
+
+
     });
 
 

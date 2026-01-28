@@ -2,8 +2,14 @@
 # 📌 Project WorkLog
 ----------------------//
 
-## 27-01-2026 
 
+
+## 28-01-2026
+- Manage property upadate facilities
+- Property delete with multiple image
+- Create property details page,
+
+## 27-01-2026
 - Property Update method done successful in database only input filed;
 - separatly UpdatePropertyMultiImage funtion are created and workable 
 - separatly item wise PropertyMultiImageDelete function create and workable,
@@ -16,7 +22,6 @@
 
 - separatly UpdatePropertyThambnail funtion are created and workable
 - separatly UpdatePropertyThambnail image function added new logic implemented; 
-
 
 ## 22-01-2026
 - Image intervetion package

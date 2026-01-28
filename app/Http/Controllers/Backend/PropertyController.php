@@ -14,6 +14,7 @@ use Intervention\Image\Facades\Image;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
+
 class PropertyController extends Controller
 {
     public function AllProperty(){
@@ -22,42 +23,55 @@ class PropertyController extends Controller
     } // End Method
 
     public function AddProperty(){
+        // Create a new empty property instance
+        $property = new Property();
         $propertytype = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
         $activeAgent = User::where('status','active')->where('role','agent')->latest()->get();
-        return view('backend.property.addEditProperty',compact('propertytype','amenities','activeAgent'));
+
+        // For add mode, set empty values
+        $property_ami = [];
+        $multiImage = collect();
+        $facilities = collect();
+
+        return view('backend.property.addEditProperty',compact('property','propertytype','property_ami','amenities','activeAgent','multiImage','facilities'));
     }// End Method
 
     // Store New Property
     public function StoreProperty(Request $request)
     {
-//        $request->validate([
-//            'property_name' => 'required',
-//            'property_status' => 'required',
-//            'lowest_price' => 'required',
-//            'max_price' => 'required',
-//            'main_thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-//        ]);
+        $request->validate([
+            'property_name' => 'required',
+            'property_status' => 'required',
+            'lowest_price' => 'required',
+            'max_price' => 'required',
+            'property_thambnail' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+        ]);
 
-        $amen =$request->amenities_id;
-        $amenites =implode(",",$amen);
-       // dd($amenities);
+        $amen = $request->amenities_id;
+        $amenites = implode(",",$amen);
 
         $pcode = IdGenerator::generate(['table' => 'properties',
             'field' => 'property_code','length' => 5, 'prefix' => 'PC' ]);
 
+        // Handle Main Thumbnail
+        $save_url = '';
         if ($request->hasFile('property_thambnail')) {
             $image = $request->file('property_thambnail');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
             $save_path = public_path('upload/property/thambnail/');
+
+            // Create directory if it doesn't exist
             if (!file_exists($save_path)) {
                 mkdir($save_path, 0777, true);
             }
+
             Image::make($image)->resize(370,250)->save($save_path.$name_gen);
             $save_url = 'upload/property/thambnail/'.$name_gen;
         }
 
-        $property_id = Property::insert([
+        // Insert Property
+        $property_id = Property::insertGetId([
             'ptype_id' => $request->ptype_id,
             'amenities_id' => $amenites,
             'property_name' => $request->property_name,
@@ -92,32 +106,37 @@ class PropertyController extends Controller
             'created_at' => Carbon::now(),
         ]);
 
-        /// start Multiple Image Upload From Here ////
-
+        /// Multiple Image Upload - FIXED VERSION
         if ($request->hasFile('multi_img')) {
             $images = $request->file('multi_img');
             $save_path = public_path('upload/property/multi-image/');
+
+            // Create directory if it doesn't exist
             if (!file_exists($save_path)) {
                 mkdir($save_path, 0777, true);
             }
+
             foreach ($images as $img) {
-                $make_name = hexdec(uniqid()) . '.' . $img->getClientOriginalExtension();
-                Image::make($img)->resize(770, 520)->save($save_path . $make_name);
-                $uploadPath = 'upload/property/multi-image/' . $make_name;
+                // Validate that $img is actually a file
+                if ($img->isValid()) {
+                    $make_name = hexdec(uniqid()) . '.' . $img->getClientOriginalExtension();
 
-                MultiImage::insert([
-                    'property_id' => $property_id,
-                    'photo_name'  => $uploadPath,
-                    'created_at'  => Carbon::now(),
-                ]);
+                    // Use the file directly, not the path
+                    Image::make($img->getRealPath())->resize(770, 520)->save($save_path . $make_name);
+                    $uploadPath = 'upload/property/multi-image/' . $make_name;
+
+                    MultiImage::insert([
+                        'property_id' => $property_id,
+                        'photo_name'  => $uploadPath,
+                        'created_at'  => Carbon::now(),
+                    ]);
+                }
             }
-        } // End Foreach
-        /// End Multiple Image Upload From Here ////
+        }
 
-        /// Facilities Add From Here ////
-        $facilities = Count($request->facility_name);
-
-        if ($facilities != NULL) {
+        /// Facilities Add
+        if ($request->facility_name != NULL) {
+            $facilities = Count($request->facility_name);
             for ($i=0; $i < $facilities; $i++) {
                 $fcount = new Facility();
                 $fcount->property_id = $property_id;
@@ -126,8 +145,6 @@ class PropertyController extends Controller
                 $fcount->save();
             }
         }
-        /// End Facilities  ////
-
 
         $notification = array(
             'message' => 'Property Added Successfully',
@@ -138,7 +155,6 @@ class PropertyController extends Controller
     }
 
     public function EditProperty($id){
-
         $facilities = Facility::where('property_id',$id)->get();
         $property = Property::findOrFail($id);
 
@@ -147,33 +163,32 @@ class PropertyController extends Controller
 
         $multiImage = MultiImage::where('property_id',$id)->get();
 
-        $property = Property::findOrFail($id);
         $propertytype = PropertyType::latest()->get();
         $amenities = Amenities::latest()->get();
         $activeAgent = User::where('status','active')->where('role','agent')->latest()->get();
 
         return view('backend.property.addEditProperty',compact('property','propertytype','amenities','activeAgent','property_ami', 'multiImage','facilities'));
-
     }// End Method
 
     // Update Property
     public function UpdateProperty(Request $request){
+        $request->validate([
+            'property_name' => 'required',
+            'property_status' => 'required',
+            'lowest_price' => 'required',
+            'max_price' => 'required',
+        ]);
 
         $amen = $request->amenities_id;
         $amenites = implode(",", $amen);
 
-        $pcode = IdGenerator::generate(['table' => 'properties',
-            'field' => 'property_code','length' => 5, 'prefix' => 'PC' ]);
-
         $property_id = $request->id;
 
         Property::findOrFail($property_id)->update([
-
             'ptype_id' => $request->ptype_id,
             'amenities_id' => $amenites,
             'property_name' => $request->property_name,
             'property_slug' => strtolower(str_replace(' ', '-', $request->property_name)),
-            'property_code' => $pcode,
             'property_status' => $request->property_status,
 
             'lowest_price' => $request->lowest_price,
@@ -198,10 +213,7 @@ class PropertyController extends Controller
             'featured' => $request->featured,
             'hot' => $request->hot,
             'agent_id' => $request->agent_id,
-            'status' => 'active',
-//            'property_thambnail' => $save_url,
             'updated_at' => Carbon::now(),
-
         ]);
 
         $notification = array(
@@ -210,8 +222,6 @@ class PropertyController extends Controller
         );
         return redirect()->route('all.property')->with($notification);
     } // End Update Property
-
-
 
     public function UpdatePropertyThambnail(Request $request)
     {
@@ -236,15 +246,12 @@ class PropertyController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
-
     } // End Method
 
     public function UpdatePropertyMultiImage(Request $request)
     {
         if ($request->hasFile('multi_img')) {
-
             foreach ($request->file('multi_img') as $id => $img) {
-
                 $imgDel = MultiImage::findOrFail($id);
                 $path = public_path($imgDel->photo_name);
                 if (file_exists($path)) {
@@ -268,10 +275,8 @@ class PropertyController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    // Delete Property
     public function PropertyMultiImageDelete($id)
     {
-
         $oldImg = MultiImage::findOrFail($id);
         unlink($oldImg->photo_name);
 
@@ -283,11 +288,9 @@ class PropertyController extends Controller
         );
 
         return redirect()->back()->with($notification);
-
     }
 
     public function StoreNewMultiImage(Request $request){
-
         $new_multi = $request->imageid;
         $image = $request->file('multi_img');
 
@@ -309,6 +312,76 @@ class PropertyController extends Controller
         return redirect()->back()->with($notification);
     }// End Method
 
+    public function UpdatePropertyFacilities(Request $request){
+        $pid = $request->id;
+        if ($request->facility_name == NULL) {
+            return redirect()->back();
+        }else{
+            Facility::where('property_id',$pid)->delete();
+            $facilities = Count($request->facility_name);
+
+            for ($i=0; $i < $facilities; $i++) {
+                $fcount = new Facility();
+                $fcount->property_id = $pid;
+                $fcount->facility_name = $request->facility_name[$i];
+                $fcount->distance = $request->distance[$i];
+                $fcount->save();
+            }
+        }
+
+        $notification = array(
+            'message' => 'Property Facility Updated Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }// End Method
+
+    public function DeleteProperty($id)
+    {
+        $property = Property::findOrFail($id);
+        unlink($property->property_thambnail);
+
+        Property::findOrFail($id)->delete();
+
+        $image = MultiImage::where('property_id', $id)->get();
+        foreach ($image as $img) {
+            unlink($img->photo_name);
+            MultiImage::where('property_id', $id)->delete();
+        }
+
+        $facilitiesData = Facility::where('property_id', $id)->get();
+        foreach ($facilitiesData as $item) {
+            $item->facility_name;
+            Facility::where('property_id', $id)->delete();
+        }
+
+        $notification = array(
+            'message' => 'Property Deleted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }// End Method
+
+    public function DetailsProperty($id)
+    {
+
+        $facilities = Facility::where('property_id', $id)->get();
+        $property = Property::findOrFail($id);
+
+        $type = $property->amenities_id;
+        $property_ami = explode(',', $type);
+
+        $multiImage = MultiImage::where('property_id', $id)->get();
+
+        $propertytype = PropertyType::latest()->get();
+        $amenities = Amenities::latest()->get();
+        $activeAgent = User::where('status', 'active')->where('role', 'agent')->latest()->get();
+
+        return view('backend.property.detailsProperty', compact('property', 'propertytype', 'amenities', 'activeAgent', 'property_ami', 'multiImage', 'facilities'));
+
+    } //end method
 
 
 
