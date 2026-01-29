@@ -3,6 +3,10 @@
 ----------------------//
 
 
+## 29-01-2026
+- Create property details page & Showed in All data,
+- Property active inactive from details page
+- bug fixed redirect login page
 
 ## 28-01-2026
 - Manage property upadate facilities

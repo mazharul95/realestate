@@ -6,6 +6,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\PropertyTypeController;
 use App\Http\Controllers\Backend\PropertyController;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,10 +55,10 @@ use App\Http\Controllers\Backend\PropertyController;
     Route::get('/agent/dashboard',[AgentController::class, 'AgentDashboard'])->name('agent.dashboard');
     });  //End Agent Group middleware
 
-    Route::get('/admin/login',[AdminController::class, 'AdminLogin'])->name('admin.login');
+//  Route::get('/admin/login',[AdminController::class, 'AdminLogin'])->name('admin.login');
+    Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login')->middleware(RedirectIfAuthenticated::class);
 
-
-    /// Admin Group Middleware
+/// Admin Group Middleware
     Route::middleware(['auth','role:admin'])->group(function(){
 
     // Property Type All Route
@@ -96,6 +97,8 @@ use App\Http\Controllers\Backend\PropertyController;
     Route::post('/update/property/facilities', 'UpdatePropertyFacilities')->name('update.property.facilities');
     Route::get('/delete/property/{id}', 'DeleteProperty')->name('delete.property');
     Route::get('/details/property/{id}', 'DetailsProperty')->name('details.property');
+    Route::post('/inactive/property', 'InactiveProperty')->name('inactive.property');
+    Route::post('/active/property', 'ActiveProperty')->name('active.property');
 
 
 
