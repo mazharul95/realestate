@@ -2,6 +2,11 @@
 # 📌 Project WorkLog
 ----------------------//
 
+## 01-02-2026
+- Agent Profile Change Password
+- Agent Profile & Image Update
+- Agent Logout Option
+- Add Agent Register Page Setup done
 
 ## 29-01-2026
 - Create property details page & Showed in All data,

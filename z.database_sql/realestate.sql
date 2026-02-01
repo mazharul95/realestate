@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 28, 2026 at 01:47 PM
+-- Generation Time: Feb 01, 2026 at 12:53 PM
 -- Server version: 9.1.0
 -- PHP Version: 8.2.26
 
@@ -305,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
@@ -315,7 +315,8 @@ INSERT INTO `users` (`id`, `name`, `username`, `email`, `email_verified_at`, `pa
 (1, 'admin', 'admin', 'admin@gmail.com', '2025-12-30 12:45:48', '$2y$12$7UV58N3clfzAkk13Qmp5U.b.EGnL72AdSqv6apF.GBcycrOg2bl2O', '2026011208421.jpg', '01611856477', 'Tejgoan,Dhaka-1215', 'admin', 'active', NULL, NULL, '2026-01-12 02:42:11'),
 (2, 'agent', 'agent', 'agent @gmail.com', NULL, '$2y$12$h5w/HcMXXxSKEMtT5wazUefhbkNdbBlc6bY904dr5WGnJGSIvcEQ2', NULL, '01724575773', NULL, 'agent', 'active', NULL, NULL, NULL),
 (3, 'user2', 'user 2', 'user2@gmail.com', NULL, '$2y$12$ANhRLJH8uvxTBw4HS.dI4ub5D43ZeAWUKnEyDOEZCI5KdU4f1W1HG', '2026010812021.jpg', '01611856477', 'motijheel', 'user', 'active', NULL, NULL, '2026-01-11 06:32:38'),
-(4, 'khan', 'khan', 'khan@gmail.com', NULL, '$2y$12$JvhZZ07MRNMdk2XHhff6auO6cxWabCPK1yJHeNRe3GFZm8Z5IQh1K', NULL, '01712345678', 'lalmatia', 'user', 'active', NULL, '2026-01-08 03:09:30', '2026-01-08 03:09:30');
+(4, 'khan', 'khan', 'khan@gmail.com', NULL, '$2y$12$JvhZZ07MRNMdk2XHhff6auO6cxWabCPK1yJHeNRe3GFZm8Z5IQh1K', NULL, '01712345678', 'lalmatia', 'user', 'active', NULL, '2026-01-08 03:09:30', '2026-01-08 03:09:30'),
+(5, 'zizzle_tech', 'zizzle_tech', 'zizzle@gmail.com', NULL, '$2y$12$bPtanwf/TzaV6N5wZ2RJXujmExE3dvZGgAUDjWXWmkAZMFKkYKNMO', '202602011249avatar-5.png', '01611856477', 'dhaka', 'agent', 'inactive', NULL, '2026-02-01 03:10:45', '2026-02-01 06:49:33');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
