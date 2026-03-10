@@ -19,8 +19,8 @@ class AgentController extends Controller
     {
         return view('agent.agent_login');
     } // End Method
-    public function AgentRegister(Request $request){
 
+    public function AgentRegister(Request $request){
 
         $user = User::create([
             'name' => $request->name,
@@ -32,11 +32,9 @@ class AgentController extends Controller
         ]);
 
         event(new Registered($user));
-
         Auth::login($user);
 
         return redirect(RouteServiceProvider::AGENT);
-
     }// End Method
 
     public function AgentLogout(Request $request){
@@ -133,8 +131,6 @@ class AgentController extends Controller
         return back()->with($notification);
 
     }// End Method
-
-
 
 
 }

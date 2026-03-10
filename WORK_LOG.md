@@ -2,6 +2,11 @@
 # 📌 Project WorkLog
 ----------------------//
 
+## 09-03-2026
+- Manage Agent in Admin Dashboard
+- Active Inactive in Agent Dashboard
+- Active Inactive Agent Form Admin Page;
+
 ## 01-02-2026
 - Agent Profile Change Password
 - Agent Profile & Image Update
